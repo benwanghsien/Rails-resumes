@@ -1,1 +1,8 @@
-<li><%= vendor.username %> <%= vendor.email %></li>
+<li class="vendor">
+  <span class="name"><%= link_to vendor.name, edit_admin_vendor_path(vendor) %></span>
+  <span class="email"><%= vendor.email %></span>
+  <span class="actions">
+    <%= link_to "編輯", edit_admin_vendor_path(vendor) %>
+    <%= link_to "刪除", admin_vendor_path(vendor), method: :delete, data: { confirm: "確認刪除？" } %>
+  </span>
+</li>

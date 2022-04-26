@@ -1,0 +1,27 @@
+nav.navbar {
+  @apply bg-rose-500 text-rose-50 flex justify-between items-center px-6 py-4 rounded-t-lg;
+
+  .brand {
+    @apply flex items-center;
+
+    .logo {
+      @apply text-4xl;
+    }
+
+    .links {
+      @apply flex ml-4;
+
+      li {
+        @apply mx-2 font-medium;
+      }
+    }
+  }
+
+  .actions {
+    @apply flex items-center;
+
+    li {
+      @apply mx-2 font-medium;
+    }
+  }
+}

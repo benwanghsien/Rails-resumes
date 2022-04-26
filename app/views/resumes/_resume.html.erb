@@ -1,10 +1,27 @@
-<li>
-  <%= "v" if resume.pinned %>
-  <%= link_to resume.title, user_resume_path(user_id: resume.user.username, id: resume.slug) %>
-  |
-  <%= link_to "預", pin_resume_path(resume), method: :patch if policy(resume).edit? %>
-  |
-  <%= link_to "X", resume_path(resume), method: :delete, data: {
-    confirm: "確定嗎？"
-  } if policy(resume).destroy? %>
-</li>
+<article class="resume-card <%= 'resume-pinned' if resume.pinned %>">
+  <div class="flex items-center justify-between mx-4 mt-3">
+    <span class="status status-<%= resume.status %>"><%= resume.status %></span>
+    <% if resume.pinned %>
+      <span class="pinned">預設</span>
+    <% end %>
+  </div>
+  <header>
+    <%= resume.title %>
+  </header>
+
+  <% if resume.mugshot.attached? %>
+    <%= image_tag resume.mugshot.variant(resize_to_limit: [300, 200])%>
+  <% else %>
+    <%= image_pack_tag "placeholder-image.png" %>
+  <% end %>
+
+  <footer class="actions">
+    <%= link_to "預覽", "#" %>
+    <%= link_to "PAY", buy_resume_path(resume), method: "post" %>
+    <%= link_to "編輯", edit_resume_path(resume) if policy(resume).edit? %>
+    <%= link_to "預設", pin_resume_path(resume), method: :patch, data: { confirm: "確定設定為預設履歷？" } if policy(resume).edit? && !resume.pinned %>
+    <%= link_to "刪除", resume_path(resume), method: :delete, data: {
+      confirm: "確定嗎？"
+    } if policy(resume).destroy? %>
+  </footer>
+</article>

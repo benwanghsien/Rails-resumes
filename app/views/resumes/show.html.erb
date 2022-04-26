@@ -1,4 +1,4 @@
-<h1><%= @resume.title %> 履歷</h1>
+<h1 class="heading"><%= @resume.title %></h1>
 <%= link_to "修改", edit_resume_path(@resume) %>
 
 <%= image_tag @resume.mugshot.variant(resize_to_limit: [200, 200]) if @resume.mugshot.attached?%>

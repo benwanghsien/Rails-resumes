@@ -1,0 +1,22 @@
+<article class="resume-card">
+  <header>
+    <%= resume.user.name %>
+  </header>
+
+  <% if resume.mugshot.attached? %>
+    <%= image_tag resume.mugshot.variant(resize_to_limit: [300, 200])%>
+  <% else %>
+    <%= image_pack_tag "placeholder-image.png" %>
+  <% end %>
+
+  <footer class="actions">
+    <%= link_to "檢視", '#' %>
+    <div>
+      <% if !resume.be_favorited.find_by(id: @vendor.id) %>
+        <%= link_to "讚", like_resume_path(resume.id), method: "post" %>
+      <% else %>
+        <%= link_to "收回讚", unlike_resume_path(resume.id), method: "delete" %>
+      <% end %>
+    </div>
+  </footer>
+</article>

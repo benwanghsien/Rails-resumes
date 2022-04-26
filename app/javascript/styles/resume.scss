@@ -1,0 +1,51 @@
+.resume-list {
+  @apply bg-gray-50 my-4 rounded gap-4 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 p-4;
+
+  .resume-card {
+    @apply w-full flex-col bg-white border-2 shadow rounded border-gray-200 border-dashed;
+
+    .status {
+      @apply rounded-2xl px-3 py-1 text-sm;
+    }
+
+    .status-draft {
+      @apply bg-gray-300 text-gray-50;
+    }
+
+    .status-published {
+      @apply bg-blue-400 text-gray-50;
+    }
+
+    .pinned {
+      @apply rounded-2xl px-2 py-1 text-sm bg-indigo-500 text-indigo-50;
+    }
+
+    img {
+      @apply w-full object-cover h-48;
+    }
+
+    header {
+      @apply text-2xl px-4 my-2;
+    }
+
+    footer.actions {
+      @apply bg-gray-50 px-3 py-2 mt-4 flex justify-between items-center;
+
+      a {
+        @apply cursor-pointer no-underline hover:bg-gray-200 px-3 py-2 rounded;
+      }
+    }
+  }
+
+  .resume-pinned {
+    @apply border-gray-500 shadow-lg;
+  }
+}
+
+.resume-list-empty {
+  @apply border-4 border-dashed border-gray-300 rounded py-10 text-center;
+
+  h2 {
+    @apply text-2xl mb-4;
+  }
+}

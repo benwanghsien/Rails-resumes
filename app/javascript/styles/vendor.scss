@@ -1,0 +1,23 @@
+.vendor-list {
+  @apply my-2;
+
+  .vendor {
+    @apply px-2 py-1 text-lg flex grid grid-cols-12 gap-4;
+
+    .name {
+      @apply col-span-3;
+    }
+
+    .email {
+      @apply col-span-6;
+    }
+
+    .actions {
+      @apply col-span-3 flex justify-end;
+
+      a {
+        @apply ml-3;
+      }
+    }
+  }
+}

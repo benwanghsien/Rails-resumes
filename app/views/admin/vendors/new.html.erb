@@ -1,27 +1,41 @@
-<h1>新增廠商</h1>
+<h1 class="heading">新增廠商</h1>
 
-<%= form_with(model: @vendor, method: "post", url: admin_vendors_path) do |form| %>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.email_field :email, autocomplete: "off" %>
+<%= form_with(model: @vendor, url: admin_vendors_path) do |form| %>
+  <div class="control">
+    <%= form.label :email, "Email" %>
+    <div class="col-span-4">
+      <%= form.email_field :email, autocomplete: "off" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username, autocomplete: "off" %>
+  <div class="control">
+    <%= form.label :name, "姓名" %>
+    <div class="col-span-4">
+      <%= form.text_field :name, autocomplete: "off" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
+  <div class="control">
+    <%= form.label :username, "帳號" %>
+    <div class="col-span-4">
+      <%= form.text_field :username, autocomplete: "off" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
+  <div class="control">
+    <%= form.label :password, "密碼" %>
+    <div class="col-span-4">
+      <%= form.password_field :password %>
+    </div>
   </div>
 
-  <%= form.submit "新增" %>
+  <div class="control">
+    <%= form.label :password_confirmation, "密碼確認" %>
+    <div class="col-span-4">
+      <%= form.password_field :password_confirmation %>
+    </div>
+  </div>
 
+  <%= link_to "回上頁", admin_vendors_path, class: "btn btn-cancel" %>
+  <%= form.submit "新增廠商" %>
 <% end %>

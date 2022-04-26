@@ -1,13 +1,23 @@
-<h1>登入</h1>
+<h1 class="heading">登入</h1>
 
 <%= form_with(url: sessions_path, scope: "user", method: "post") do |form| %>
-  <div class="field">
+  <div class="control">
     <%= form.label :account, "帳號" %>
-    <%= form.text_field :account, autocomplete: "off", placeholder: "使用 Email 或 Username 都可登入" %>
+    <div class="col-span-2">
+      <%= form.text_field :account, autocomplete: "off", placeholder: "使用 Email 或 Username 都可登入" %>
+    </div>
   </div>
-  <div class="field">
+
+  <div class="control">
     <%= form.label :password, "密碼" %>
-    <%= form.password_field :password %>
+    <div class="col-span-2">
+      <%= form.password_field :password %>
+    </div>
   </div>
+
   <%= form.submit "登入" %>
 <% end %>
+
+<footer class="mt-8 text-gray-600">
+  還沒有帳號嗎？<%= link_to "註冊", sign_up_users_path %>一個吧！
+</footer>

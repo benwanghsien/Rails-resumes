@@ -1,0 +1,59 @@
+.btn {
+  @apply cursor-pointer px-3 py-2 rounded;
+}
+
+form {
+  @apply space-y-8;
+
+  .control {
+    @apply grid grid-cols-6 gap-4;
+
+    label {
+      @apply font-medium py-2 flex items-start;
+    }
+
+    .field_with_errors {
+      label {
+        @apply text-red-600;
+      }
+
+      input[type="text"],
+      input[type="file"],
+      input[type="email"],
+      input[type="password"] {
+        @apply border-red-600 bg-red-50;
+      }
+    }
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="file"],
+  input[type="password"] {
+    @apply w-full border border-gray-300 rounded px-3 py-2;
+  }
+
+  select {
+    @apply shadow-sm w-full border border-gray-300 py-2 px-3 rounded-md;
+  }
+
+  textarea {
+    @apply w-full;
+  }
+
+  input[type="submit"] {
+    @apply btn bg-rose-500 text-rose-50;
+  }
+
+  .attachments {
+    @apply px-2 py-1 font-medium rounded shadow-sm bg-gray-50;
+
+    svg {
+      @apply mr-1;
+    }
+
+    li {
+      @apply my-1;
+    }
+  }
+}

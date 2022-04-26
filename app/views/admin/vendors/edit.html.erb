@@ -1,0 +1,41 @@
+<h1 class="heading">編輯廠商</h1>
+
+<%= form_with(model: @vendor, url: admin_vendor_path(@vendor)) do |form| %>
+  <div class="control">
+    <%= form.label :email, "Email" %>
+    <div class="col-span-4">
+      <%= form.email_field :email, autocomplete: "off" %>
+    </div>
+  </div>
+
+  <div class="control">
+    <%= form.label :name, "姓名" %>
+    <div class="col-span-4">
+      <%= form.text_field :name, autocomplete: "off" %>
+    </div>
+  </div>
+
+  <div class="control">
+    <%= form.label :username, "帳號" %>
+    <div class="col-span-4">
+      <%= form.text_field :username, autocomplete: "off" %>
+    </div>
+  </div>
+
+  <div class="control">
+    <%= form.label :password, "密碼" %>
+    <div class="col-span-4">
+      <%= form.password_field :password %>
+    </div>
+  </div>
+
+  <div class="control">
+    <%= form.label :password_confirmation, "密碼確認" %>
+    <div class="col-span-4">
+      <%= form.password_field :password_confirmation %>
+    </div>
+  </div>
+
+  <%= link_to "回上頁", admin_vendors_path, class: "btn btn-cancel" %>
+  <%= form.submit "更新廠商" %>
+<% end %>

@@ -1,15 +1,42 @@
 <nav class="navbar">
-  <div class="brand"><%= link_to "厲害的履歷", root_path %></div>
+  <div class="brand">
+    <div class="logo">
+      <%= link_to root_path, class: "no-underline" do %>
+        <i class="fa-solid fa-people-group"></i> ASTRO
+      <% end %>
+    </div>
+
+    <ul class="links">
+      <% if policy(:interview).new? %>
+        <li><%= link_to '#', data: { confirm: "準備好要開始面試了嗎？" } do %>
+          <i class="fa-solid fa-video"></i> 線上快速面試
+        <% end %></li>
+      <% end %>
+
+      <% if policy(:user).manage? %>
+        <li><%= link_to '廠商', admin_vendors_path %></li>
+        <li><%= link_to '學員', admin_users_path %></li>
+      <% end %>
+    </ul>
+  </div>
+
   <ul class="actions">
     <% if user_signed_in? %>
       <li><%= current_user.email %></li>
       <% if policy(:resume).new? %>
-      <li><%= link_to "我的履歷", my_resumes_path %></li>
+        <li><%= link_to '我的履歷', my_resumes_path %></li>
       <% end %>
-      <li><%= link_to "登出", sessions_path, method: "delete" %></li>
+      <% if policy(:interview).create? %>
+        <li><%= link_to '履歷', '#' %></li>
+      <% end %>
+      <li><%= link_to sessions_path, method: :delete, data: { confirm: '確認登出？'} do %>
+       登出 <i class="fa-solid fa-right-from-bracket"></i>
+      <% end %>
+      </li>
+
     <% else %>
-      <li><%= link_to "註冊", sign_up_users_path %></li>
-      <li><%= link_to "登入", sign_in_users_path %></li>
+      <li><%= link_to '註冊', sign_up_users_path %></li>
+      <li><%= link_to '登入', sign_in_users_path %></li>
     <% end %>
   </ul>
 </nav>

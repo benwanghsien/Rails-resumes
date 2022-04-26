@@ -1,0 +1,19 @@
+body {
+  @apply mx-auto bg-white rounded-lg shadow max-w-7xl my-6;
+}
+
+main.main {
+  @apply p-10;
+}
+
+h1.heading {
+  @apply text-5xl font-thin mb-6;
+}
+
+a {
+  @apply underline hover:no-underline underline-offset-4;
+}
+
+a.action {
+  @apply px-3 py-2 rounded bg-rose-500 text-rose-50 no-underline;
+}

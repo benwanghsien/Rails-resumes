@@ -1,7 +1,13 @@
-<h1>我的履歷</h1>
+<h1 class="heading">我的履歷</h1>
 
-<%= link_to "新增履歷", new_resume_path %>
-
-<ul>
-  <%= render @resumes %>
-</ul>
+<% if @resumes.any? %>
+  <%= link_to "新增履歷", new_resume_path, class: "action" %>
+  <section class="resume-list">
+    <%= render @resumes %>
+  </section>
+<% else %>
+  <section class="resume-list-empty">
+    <h2>目前還沒有任何履歷，趕快新增一份吧！</h2>
+    <%= link_to "新增履歷", new_resume_path, class: "action" %>
+  </section>
+<% end %>

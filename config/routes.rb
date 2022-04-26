@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   get '/@:user_id', to: 'users#default_resume'
   get '/@:user_id/:id', to: 'resumes#show', as: 'user_resume'
@@ -9,6 +11,9 @@ Rails.application.routes.draw do
 
     member do
       patch :pin
+      post :like
+      delete :unlike
+      post :buy
     end
   end
 
@@ -21,6 +26,16 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :vendors, except: [:show]
+    resources :users, only: [:index]
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :resumes, only: [] do
+        post :like
+        delete :unlike
+      end
+    end
   end
 
   root 'resumes#index'

@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def no_permission
-    redirect_to sign_in_users_path
+    not_found
   end
 
   def authenticate_user

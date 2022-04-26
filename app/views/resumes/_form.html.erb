@@ -1,25 +1,53 @@
 <%= form_with(model: resume) do |form| %>
-  <div class="fields">
+  <div class="control">
     <%= form.label :title, "標題" %>
-    <%= form.text_field :title, autocomplete: "off", autofocus: true %>
+    <div class="col-span-4">
+      <%= form.text_field :title, autocomplete: "off" %>
+    </div>
   </div>
 
-  <div class="fields">
-    <%= form.label :mugshot, "照片" %>
-    <%= form.file_field :mugshot %>
-  </div>
-
-  <div class="fields">
-    <%= form.label :content, "內容" %>
-    <%= form.text_area :content, data: {
-      controller: "markdown-editor"
-    } %>
-  </div>
-
-  <div class="fields">
+  <div class="control">
     <%= form.label :status, "狀態" %>
-    <%= form.select :status, Resume.all_status %>
+    <div class="col-span-4">
+      <%= form.select :status, Resume.all_status %>
+    </div>
   </div>
 
+  <div class="control">
+    <%= form.label :mugshot, "照片" %>
+    <div class="col-span-5">
+      <%= image_tag resume.mugshot.variant(resize_to_limit: [300, 200]), class: 'my-2' if resume.mugshot.attached? %>
+      <%= form.file_field :mugshot %>
+    </div>
+  </div>
+
+  <div class="control">
+    <%= form.label :content, "內容" %>
+    <div class="col-span-5">
+      <%= form.text_area :content, data: {
+        controller: "markdown-editor"
+      } %>
+      <span class="text-sm text-gray-500">說明：可使用 Markdown 語法編寫</span>
+    </div>
+  </div>
+
+  <div class="control">
+    <%= form.label :attachments, "其它附件" %>
+    <div class="col-span-5">
+      <%= form.file_field :attachments, accept: "application/pdf, application/zip", multiple: true %>
+      <span class="text-sm text-gray-500">說明：可上傳 zip 壓縮檔或 PDF 檔</span>
+
+      <% if resume.attachments.any? %>
+        <ul class="attachments">
+          <% resume.attachments.each do |attachment| %>
+            <li><%= file_icon(attachment.filename) %> <%= link_to attachment.filename, attachment %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+    </div>
+  </div>
+
+  <%= link_to "回上頁", my_resumes_path, class: "btn btn-cancel" %>
   <%= form.submit %>
 <% end %>

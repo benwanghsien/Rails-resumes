@@ -1,5 +1,5 @@
-<h1>Resume</h1>
-
-<ul>
-  <%= render @resumes %>
-</ul>
+<% if policy(:resume).index? %>
+  <section class="resume-list">
+    <%= render partial: "resume_vendor", collection: @resumes, as: :resume %>
+  </section>
+<% end %>
