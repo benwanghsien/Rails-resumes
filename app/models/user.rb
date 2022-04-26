@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   # relationships
   has_many :resumes
+  has_many :vender_favorited_resumes
+  has_many :favorite_resumes, through: :vender_favorited_resumes, source: :resume
 
   # scopes
   scope :vendors, -> { where(role: 'vendor') }
@@ -19,6 +21,10 @@ class User < ApplicationRecord
 
   def default_resume
     resumes.last
+  end
+
+  def like?(resume)
+    favorite_resumes.exists?(resume.id)
   end
 
   def self.login(user_data)

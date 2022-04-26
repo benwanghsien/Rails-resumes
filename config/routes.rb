@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
     member do
       patch :pin
+      post :like
+      delete :unlike
+      post :buy
     end
   end
 
@@ -24,6 +27,15 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :vendors, except: [:show]
     resources :users, only: [:index]
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :resumes, only: [] do
+        post :like
+        delete :unlike
+      end
+    end
   end
 
   root 'resumes#index'

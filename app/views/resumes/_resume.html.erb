@@ -17,6 +17,7 @@
 
   <footer class="actions">
     <%= link_to "預覽", "#" %>
+    <%= link_to "PAY", buy_resume_path(resume), method: "post" %>
     <%= link_to "編輯", edit_resume_path(resume) if policy(resume).edit? %>
     <%= link_to "預設", pin_resume_path(resume), method: :patch, data: { confirm: "確定設定為預設履歷？" } if policy(resume).edit? && !resume.pinned %>
     <%= link_to "刪除", resume_path(resume), method: :delete, data: {

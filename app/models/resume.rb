@@ -2,6 +2,7 @@
 
 class Resume < ApplicationRecord
   extend FriendlyId
+  acts_as_paranoid
   friendly_id :random_slug, use: :slugged
 
   has_one_attached :mugshot
@@ -20,6 +21,8 @@ class Resume < ApplicationRecord
 
   # relationships
   belongs_to :user
+  has_many :vender_favorited_resumes
+  has_many :be_favorited, through: :vender_favorited_resumes, source: :user
 
   def self.all_status
     [

@@ -10,6 +10,7 @@ class ResumesController < BaseController
       redirect_to my_resumes_path
     else
       @resumes = Resume.published.where(pinned: true)
+      @vendor = current_user
     end
   end
 
@@ -18,7 +19,8 @@ class ResumesController < BaseController
     @resumes = current_user.resumes
   end
 
-  def show; end
+  def show
+  end
 
   def new
     authorize :resume
@@ -52,7 +54,6 @@ class ResumesController < BaseController
 
   def destroy
     authorize :resume
-
     @resume.destroy
     redirect_to resumes_path, notice: '已刪除'
   end
@@ -64,6 +65,28 @@ class ResumesController < BaseController
     @resume.update(pinned: true)
 
     redirect_to my_resumes_path
+  end
+
+  def like
+    resume = Resume.published.friendly.find(params[:id])
+    @vendor = current_user
+    if !@vendor.like?(resume)
+      @vendor.favorite_resumes << resume
+      redirect_to root_path, notice: "點讚！"
+    end
+  end
+
+  def unlike
+    resume = Resume.published.friendly.find(params[:id])
+    @vendor = current_user
+    if @vendor.like?(resume)
+      @vendor.favorite_resumes.destroy(resume)
+      redirect_to root_path, notice: "取消讚！"
+    end
+  end
+
+  def buy
+    
   end
 
   private

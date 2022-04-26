@@ -29,7 +29,7 @@
     }
 
     footer.actions {
-      @apply bg-gray-50 px-3 py-2 mt-4 flex;
+      @apply bg-gray-50 px-3 py-2 mt-4 flex justify-between items-center;
 
       a {
         @apply cursor-pointer no-underline hover:bg-gray-200 px-3 py-2 rounded;
