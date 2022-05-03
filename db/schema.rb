@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_26_060131) do
+ActiveRecord::Schema.define(version: 2022_05_03_073817) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 2022_04_26_060131) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id", null: false
+    t.integer "resume_id", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deleted_at"], name: "index_comments_on_deleted_at"
+    t.index ["resume_id"], name: "index_comments_on_resume_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -49,6 +61,18 @@ ActiveRecord::Schema.define(version: 2022_04_26_060131) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "slug"
+    t.integer "price"
+    t.string "ststus", default: "pending"
+    t.integer "resume_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["resume_id"], name: "index_orders_on_resume_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "resumes", force: :cascade do |t|
@@ -88,6 +112,10 @@ ActiveRecord::Schema.define(version: 2022_04_26_060131) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "resumes"
+  add_foreign_key "comments", "users"
+  add_foreign_key "orders", "resumes"
+  add_foreign_key "orders", "users"
   add_foreign_key "vender_favorited_resumes", "resumes"
   add_foreign_key "vender_favorited_resumes", "users"
 end

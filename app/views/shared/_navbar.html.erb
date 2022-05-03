@@ -28,6 +28,7 @@
       <% end %>
       <% if policy(:interview).create? %>
         <li><%= link_to '履歷', '#' %></li>
+        <li><%= link_to '我的訂單', orders_path %></li>
       <% end %>
       <li><%= link_to sessions_path, method: :delete, data: { confirm: '確認登出？'} do %>
        登出 <i class="fa-solid fa-right-from-bracket"></i>
@@ -37,6 +38,6 @@
     <% else %>
       <li><%= link_to '註冊', sign_up_users_path %></li>
       <li><%= link_to '登入', sign_in_users_path %></li>
-    <% end %>
+    <% end %> 
   </ul>
 </nav>

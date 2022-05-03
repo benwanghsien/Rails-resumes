@@ -9,7 +9,7 @@ class ResumesController < BaseController
     if user_signed_in? && current_user.role == 'user'
       redirect_to my_resumes_path
     else
-      @resumes = Resume.published.where(pinned: true)
+      @resumes = Resume.published.where(pinned: true).includes(:user)
       @vendor = current_user
     end
   end
@@ -86,7 +86,15 @@ class ResumesController < BaseController
   end
 
   def buy
-    
+    resume = Resume.published.friendly.find(params[:id])
+    # @order = Order.new(price: 10, resume: resume)
+    order = current_user.orders.create(price: 10, resume: resume)
+    redirect_to checkout_order_path(order)
+  end
+
+  def view
+    @resume = Resume.friendly.find(params[:id])
+    @comment = Comment.new()
   end
 
   private

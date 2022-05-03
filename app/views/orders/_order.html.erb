@@ -1,0 +1,8 @@
+<li>
+  <%= order.slug %> |
+  <%= order.price %> |
+  <%= order.ststus %> |
+  <%= link_to "付款", checkout_order_path(order.slug) if order.may_pay? %>
+  <%= link_to "取消", cancel_order_path(order.slug), method: "delete" if order.may_cancel? %>
+  <%= link_to "退款", "#" if order.may_refund? %>
+</li>

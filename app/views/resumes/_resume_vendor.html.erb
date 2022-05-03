@@ -10,7 +10,8 @@
   <% end %>
 
   <footer class="actions">
-    <%= link_to "檢視", '#' %>
+    <%= link_to "檢視", view_resume_path(resume) %>
+    <%= link_to "PAY", buy_resume_path(resume), method: "post" %>
     <div>
       <% if !resume.be_favorited.find_by(id: @vendor.id) %>
         <%= link_to "讚", like_resume_path(resume.id), method: "post" %>
