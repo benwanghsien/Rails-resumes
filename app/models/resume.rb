@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Resume < ApplicationRecord
-  extend FriendlyId
   acts_as_paranoid
-  friendly_id :random_slug, use: :slugged
+  include Slugable
 
   has_one_attached :mugshot
   has_many_attached :attachments
@@ -23,6 +22,7 @@ class Resume < ApplicationRecord
   belongs_to :user
   has_many :vender_favorited_resumes
   has_many :be_favorited, through: :vender_favorited_resumes, source: :user
+  has_many :comments
 
   def self.all_status
     [
@@ -37,10 +37,6 @@ class Resume < ApplicationRecord
   end
 
   private
-
-  def random_slug
-    [*'A'..'Z', *'a'..'z', *'0'..'9'].sample(10).join
-  end
 
   def set_as_default
     self.pinned = true if user.resumes.count.zero?

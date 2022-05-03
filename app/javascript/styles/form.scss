@@ -56,4 +56,8 @@ form {
       @apply my-1;
     }
   }
+
+  input:disabled {
+    @apply bg-rose-200 cursor-default;
+  }
 }

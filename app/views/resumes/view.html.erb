@@ -1,0 +1,19 @@
+<h1 class="heading"><%= @resume.user.name %></h1>
+
+<section class="grid grid-cols-2 gap-4">
+  <%= markdown(@resume.content) %>
+
+  <ul>
+    <%= render partial: "/resumes/comment", collection: @resume.comments %>
+  </ul>
+  <%# form_with model: @comment, url: resume_comments_path(@resume) do |form| %>
+  <%# end %>
+  <%= form_with(model: [@resume, @comment]) do |form| %>
+    <div class="field">
+      <%= form.text_area :content, data: {controller: "markdown-editor"} %>
+    </div>
+
+    <%= form.submit %>
+  <% end %>
+</section>
+
